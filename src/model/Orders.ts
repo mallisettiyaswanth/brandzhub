@@ -1,17 +1,34 @@
 import mongoose, { model, Schema } from "mongoose";
 
 interface OrderSchemaType {
-  productId: mongoose.Schema.Types.ObjectId;
+  productIds: mongoose.Schema.Types.ObjectId[];
+  quantity: number;
   address: string;
+  username: string;
+  phoneNumber: string;
 }
 
 const OrderSchema = new Schema<OrderSchemaType>({
-  productId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Product",
+  productIds: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
+      required: true,
+    },
+  ],
+  address: {
+    type: String,
     required: true,
   },
-  address: {
+  quantity: {
+    type: Number,
+    required: true,
+  },
+  username: {
+    type: String,
+    required: true,
+  },
+  phoneNumber: {
     type: String,
     required: true,
   },
