@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export function Hero() {
   return (
-    <div className="relative h-[300px] w-full bg-gray-100">
+    <div className="relative h-[690px] w-full bg-gray-100">
       <Image
         src="/placeholder.svg?height=300&width=1200"
         alt="Crocs Banner"
@@ -17,6 +17,6 @@ export function Hero() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 

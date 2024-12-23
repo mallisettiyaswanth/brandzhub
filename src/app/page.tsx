@@ -7,18 +7,20 @@ import { Footer } from '@/components/footer'
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-gray-50">
+    <>
       <Header />
-      <main className="flex-grow">
-        <Hero />
-        <div className="container mx-auto">
-          <CategoryGrid />
-          <SeasonalBanner />
-          <ProductGrid />
-        </div>
-      </main>
-      <Footer />
-    </div>
-  )
+      <div className="flex min-h-screen flex-col bg-gray-50 pt-20">
+        <main className="flex-grow">
+          <Hero />
+          <div className="container mx-auto">
+            <CategoryGrid />
+            <SeasonalBanner />
+            <ProductGrid />
+          </div>
+        </main>
+        <Footer />
+      </div>
+    </>
+  );
 }
 
