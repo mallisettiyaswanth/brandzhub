@@ -1,6 +1,6 @@
 "use server";
 
-import { connectDB } from "@/lib/mongodb";
+import { connectDb } from "@/lib/mongodb";
 import Product from "@/model/Product";
 
 export const addProduct = async (
@@ -12,14 +12,14 @@ export const addProduct = async (
   sizes: string[]
 ) => {
   try {
-    await connectDB();
+    await connectDb();
     const product = new Product({
       name: productName,
       cost: price,
       category,
-      image,
+      images: image,
       type,
-      sizes,
+      size: sizes,
     });
     await product.save();
     console.log("Product is saved");
@@ -38,8 +38,17 @@ export const addProduct = async (
 
 export const getProducts = async () => {
   try {
-    await connectDB();
-    const products = await Product.find({});
+    await connectDb();
+    let products = await Product.find({});
+    products = products.map((product) => {
+      return {
+        id: product._id.toString(),
+        ...product._doc,
+      };
+    });
+
+    console.log(products);
+
     return {
       status: 200,
       body: {
@@ -54,7 +63,58 @@ export const getProducts = async () => {
   }
 };
 
+export const editProduct = async (
+  id: string,
+  productName: string,
+  price: number,
+  images: string[],
+  category: string[],
+  type: string,
+  sizes: string[]
+) => {
+  try {
+    const result = await Product.updateOne(
+      { _id: id },
+      {
+        $set: {
+          name: productName,
+          price: price,
+          images: images,
+          category: category,
+          type: type,
+          sizes: sizes,
+        },
+      }
+    );
 
-const editProduct = async () => {};
+    return {
+      status: 202,
+      body: {
+        message: "Updated successfully",
+      },
+    };
+  } catch (error) {
+    return {
+      status: 404,
+      message: "Failed",
+    };
+  }
+};
 
-const deleteProduct = async () => {};
+export const deleteProduct = async (productId: string) => {
+  try {
+    console.log(productId);
+    const deletePr = await Product.deleteOne({
+      _id: productId,
+    });
+    console.log(deletePr);
+    return {
+      status: 200,
+    };
+  } catch {
+    return {
+      status: 404,
+      message: "Failed",
+    };
+  }
+};
