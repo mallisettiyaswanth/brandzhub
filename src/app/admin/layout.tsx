@@ -33,6 +33,11 @@ export default function AdminLayout({
               Orders
             </Button>
           </Link>
+          <Link href="/admin/add-products">
+            <Button variant="ghost" className="w-full justify-start">
+              Add Products
+            </Button>
+          </Link>
         </nav>
       </aside>
       <main className="flex-1 p-8 overflow-auto">{children}</main>

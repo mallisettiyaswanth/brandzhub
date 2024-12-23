@@ -9,20 +9,27 @@ import { MultiSelect } from "@/components/ui/multi-select";
 export function AddProductForm() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
+  const [type, setType] = useState("");
+  const [category, setCategories] = useState<string[]>([""]);
   const [sizes, setSizes] = useState<string[]>([]);
   const [images, setImages] = useState<string[]>([""]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     if (images[0].trim() === "") {
       alert("At least one image is required.");
       return;
     }
-    await addProduct(name, parseInt(price));
+    await addProduct(name, parseInt(price), images, category, type, sizes);
     setName("");
     setPrice("");
+    setType("");
+    setCategories([""]);
     setSizes([]);
     setImages([""]);
+    setIsLoading(false);
   };
 
   const handleAddImage = () => {
@@ -49,6 +56,12 @@ export function AddProductForm() {
     { value: "large", label: "Large" },
   ];
 
+  const categoryOptions = [
+    { value: "small", label: "Small" },
+    { value: "medium", label: "Medium" },
+    { value: "large", label: "Large" },
+  ];
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <Input
@@ -56,6 +69,7 @@ export function AddProductForm() {
         value={name}
         onChange={(e) => setName(e.target.value)}
         required
+        disabled={isLoading}
       />
       <Input
         type="number"
@@ -63,6 +77,15 @@ export function AddProductForm() {
         value={price}
         onChange={(e) => setPrice(e.target.value)}
         required
+        disabled={isLoading}
+      />
+      <Input
+        type="number"
+        placeholder="Price"
+        value={price}
+        onChange={(e) => setType(e.target.value)}
+        required
+        disabled={isLoading}
       />
       {images.map((image, index) => (
         <div key={index} className="flex items-center space-x-2">
@@ -71,6 +94,7 @@ export function AddProductForm() {
             value={image}
             onChange={(e) => handleImageChange(index, e.target.value)}
             required={index === 0}
+            disabled={isLoading}
           />
           {index > 0 && (
             <Button
@@ -87,13 +111,22 @@ export function AddProductForm() {
         options={sizeOptions}
         onValueChange={setSizes}
         placeholder="Select sizes"
+        disabled={isLoading}
+      />
+      <MultiSelect
+        options={categoryOptions}
+        onValueChange={setCategories}
+        placeholder="Select category"
+        disabled={isLoading}
       />
       <div className="flex gap-5 items-center">
-        <Button type="button" onClick={handleAddImage}>
+        <Button type="button" onClick={handleAddImage} disabled={isLoading}>
           Add Image
         </Button>
 
-        <Button type="submit">Add Product</Button>
+        <Button type="submit" disabled={isLoading}>
+          {isLoading ? "Adding..." : "Add Product"}
+        </Button>
       </div>
     </form>
   );
