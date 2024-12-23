@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function AdminLayout({
   children,
@@ -14,6 +14,7 @@ export default function AdminLayout({
     return localStorage.getItem("email") ?? undefined;
   });
   const rotuer = useRouter();
+  const pathName = usePathname();
 
   useEffect(() => {
     if (!email) rotuer.replace("/");
@@ -22,19 +23,44 @@ export default function AdminLayout({
   return (
     <div className="flex h-screen bg-gray-100">
       <aside className="w-64 bg-white shadow-md">
-        <nav className="p-5 space-y-2">
+        <nav className="p-5 flex gap-3 flex-col">
+          <Link href="/">
+            <Button
+              variant="ghost"
+              className={`w-full justify-start rounded-md ${
+                pathName === "/" && "bg-accent"
+              } `}
+            >
+              Home
+            </Button>
+          </Link>
           <Link href="/admin/products">
-            <Button variant="ghost" className="w-full justify-start">
+            <Button
+              variant="ghost"
+              className={`w-full justify-start rounded-md ${
+                pathName === "/admin/products" && "bg-accent"
+              } `}
+            >
               Products
             </Button>
           </Link>
           <Link href="/admin/orders">
-            <Button variant="ghost" className="w-full justify-start">
+            <Button
+              variant="ghost"
+              className={`w-full justify-start rounded-md ${
+                pathName === "/admin/orders" && "bg-accent"
+              } `}
+            >
               Orders
             </Button>
           </Link>
           <Link href="/admin/add-products">
-            <Button variant="ghost" className="w-full justify-start">
+            <Button
+              variant="ghost"
+              className={`w-full justify-start rounded-md ${
+                pathName === "/admin/add-products" && "bg-accent"
+              } `}
+            >
               Add Products
             </Button>
           </Link>

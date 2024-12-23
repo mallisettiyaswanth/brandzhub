@@ -22,7 +22,6 @@ export const addProduct = async (
       size: sizes,
     });
     await product.save();
-    console.log("Product is saved");
     return {
       status: 201,
       message: "Created",
@@ -46,9 +45,6 @@ export const getProducts = async () => {
         ...product._doc,
       };
     });
-
-    console.log(products);
-
     return {
       status: 200,
       body: {
@@ -72,6 +68,7 @@ export const editProduct = async (
   type: string,
   sizes: string[]
 ) => {
+  console.log(sizes);
   try {
     const result = await Product.updateOne(
       { _id: id },
@@ -82,11 +79,15 @@ export const editProduct = async (
           images: images,
           category: category,
           type: type,
-          sizes: sizes,
+          size: sizes,
         },
+      },
+      {
+        new: true,
       }
     );
 
+    console.log(result);
     return {
       status: 202,
       body: {
@@ -103,11 +104,9 @@ export const editProduct = async (
 
 export const deleteProduct = async (productId: string) => {
   try {
-    console.log(productId);
     const deletePr = await Product.deleteOne({
       _id: productId,
     });
-    console.log(deletePr);
     return {
       status: 200,
     };

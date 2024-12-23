@@ -9,7 +9,7 @@ type Props = {
 const ProductCarousel = ({ images }: Props) => {
   return (
     <div>
-      {images.length > 1 ? (
+      {images.length > 0 ? (
         <ImageSlider images={images} />
       ) : (
         <div className="w-full min-h-40 flex items-center justify-center flex-1">
@@ -44,18 +44,22 @@ function ImageSlider({ images }: { images: string[] }) {
         alt={`Image ${currentIndex + 1}`}
         className="w-full h-full object-cover"
       />
-      <button
-        onClick={goToPrevious}
-        className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white p-1 rounded-full"
-      >
-        &#8592;
-      </button>
-      <button
-        onClick={goToNext}
-        className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white p-1 rounded-full"
-      >
-        &#8594;
-      </button>
+      {images.length > 1 && (
+        <>
+          <button
+            onClick={goToPrevious}
+            className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white p-1 rounded-full"
+          >
+            &#8592;
+          </button>
+          <button
+            onClick={goToNext}
+            className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white p-1 rounded-full"
+          >
+            &#8594;
+          </button>
+        </>
+      )}
     </div>
   );
 }

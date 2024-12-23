@@ -1,6 +1,6 @@
 "use client";
 
-import { useDebugValue, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,7 +16,7 @@ export default function LoginPage() {
   });
 
   useEffect(() => {
-    if (email) return router.push("/admin/orders");
+    if (email) return router.push("/admin/products");
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {

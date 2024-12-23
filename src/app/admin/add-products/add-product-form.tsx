@@ -18,6 +18,7 @@ import {
 import { X } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 type Product = {
   id: string;
@@ -56,25 +57,37 @@ const categoryOptions = [
 
 type Props = {
   product?: Product;
+  callback?: () => void;
 };
 
-export function AddProductForm({ product }: Props) {
+export function AddProductForm({ product, callback }: Props) {
   const [sizes, setSizes] = useState<string[]>(() => {
-    return product?.size ?? [""];
+    return product?.size?.length
+      ? product.size.filter((s) =>
+          sizeOptions.some((option) => option.value === s)
+        )
+      : [];
   });
+
   const [categories, setCategories] = useState<string[]>(() => {
-    return product?.category ?? [""];
+    return product?.category?.length
+      ? product.category.filter((category) =>
+          categoryOptions.some((option) => option.value === category)
+        )
+      : [];
   });
+
+  const router = useRouter();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
       name: product?.name ?? "",
       price: product?.cost ?? 0,
-      type: product?.type ?? "",
-      images: product?.images ?? [""],
-      category: product?.category ?? [""],
-      sizes: product?.size ?? [],
+      type: product?.type[0] ?? "",
+      images: product?.images ?? [],
+      category: categories ?? [],
+      sizes: sizes ?? [],
     },
   });
 
@@ -130,11 +143,13 @@ export function AddProductForm({ product }: Props) {
       sizes
     );
 
-    if (resposne.status === 201) {
+    if (resposne.status === 202) {
       toast("Success", {
-        description: "Product is added",
+        description: "Changes Saved",
       });
+      if (callback) callback();
       form.reset();
+      router.refresh();
     } else {
       toast("Error", {
         description: "Something went wrong!",
@@ -285,6 +300,7 @@ export function AddProductForm({ product }: Props) {
               <FormLabel>Sizes</FormLabel>
               <FormControl>
                 <MultiSelect
+                  defaultValue={sizes}
                   options={sizeOptions}
                   {...field}
                   onValueChange={setSizes}
@@ -306,6 +322,7 @@ export function AddProductForm({ product }: Props) {
               <FormLabel>Category</FormLabel>
               <FormControl>
                 <MultiSelect
+                  defaultValue={categories}
                   options={categoryOptions}
                   {...field}
                   onValueChange={setCategories}

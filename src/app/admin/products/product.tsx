@@ -84,7 +84,11 @@ const ProductCard = ({ product }: Props) => {
             </Button>
           </DialogTrigger>
           <DialogContent>
-            <AddProductForm product={product} />
+            <DialogTitle>Edit Product</DialogTitle>
+            <AddProductForm
+              product={product}
+              callback={() => setEditModelOpen(false)}
+            />
           </DialogContent>
         </Dialog>
 
