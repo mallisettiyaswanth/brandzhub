@@ -53,3 +53,8 @@ export const getProducts = async () => {
     };
   }
 };
+
+
+const editProduct = async () => {};
+
+const deleteProduct = async () => {};
