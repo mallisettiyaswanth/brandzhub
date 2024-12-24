@@ -68,14 +68,14 @@ export const editProduct = async (
   type: string,
   sizes: string[]
 ) => {
-  console.log(sizes);
   try {
+    await connectDb();
     const result = await Product.updateOne(
       { _id: id },
       {
         $set: {
           name: productName,
-          price: price,
+          cost: price,  
           images: images,
           category: category,
           type: type,
@@ -87,7 +87,6 @@ export const editProduct = async (
       }
     );
 
-    console.log(result);
     return {
       status: 202,
       body: {
@@ -104,6 +103,7 @@ export const editProduct = async (
 
 export const deleteProduct = async (productId: string) => {
   try {
+    await connectDb();
     const deletePr = await Product.deleteOne({
       _id: productId,
     });
@@ -117,3 +117,4 @@ export const deleteProduct = async (productId: string) => {
     };
   }
 };
+

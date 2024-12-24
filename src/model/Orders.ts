@@ -1,27 +1,32 @@
 import mongoose, { model, Schema } from "mongoose";
 
 interface OrderSchemaType {
-  productIds: mongoose.Schema.Types.ObjectId[];
+  size: string;
+  product: mongoose.Schema.Types.ObjectId;
   quantity: number;
   address: string;
   username: string;
   phoneNumber: string;
+  status: string;
+  cost: number;
 }
 
 const OrderSchema = new Schema<OrderSchemaType>({
-  productIds: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Product",
-      required: true,
-    },
-  ],
-  address: {
+  quantity: {
+    type: Number,
+    required: true,
+  },
+  size: {
     type: String,
     required: true,
   },
-  quantity: {
-    type: Number,
+  product: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Product",
+    required: true,
+  },
+  address: {
+    type: String,
     required: true,
   },
   username: {
@@ -32,9 +37,17 @@ const OrderSchema = new Schema<OrderSchemaType>({
     type: String,
     required: true,
   },
+  status: {
+    type: String,
+    required: true,
+  },
+  cost: {
+    type: Number,
+    required: true,
+  },
 });
 
 const Order =
-  mongoose.models?.Order || model<OrderSchemaType>("Product", OrderSchema);
+  mongoose.models?.Order || model<OrderSchemaType>("Order", OrderSchema);
 
 export default Order;
