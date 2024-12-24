@@ -8,7 +8,7 @@ type Props = {
 
 const ProductCarousel = ({ images }: Props) => {
   return (
-    <div>
+    <div className="rounded-md overflow-hidden">
       {images.length > 0 ? (
         <ImageSlider images={images} />
       ) : (

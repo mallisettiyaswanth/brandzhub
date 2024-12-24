@@ -36,7 +36,7 @@ export default function OrderItem({ order, index }: OrderItemProps) {
       </CardHeader>
       <CardContent className="p-4 bg-white dark:bg-gray-800">
         <div className="space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between ">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 lg:gap-0">
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
                 <User className="h-4 w-4 text-blue-500 dark:text-blue-400" />
@@ -53,7 +53,7 @@ export default function OrderItem({ order, index }: OrderItemProps) {
             </div>
             <Badge
               variant="secondary"
-              className="text-lg sm:mt-0 bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-100 mt-auto self-auto rounded-full"
+              className="text-lg sm:mt-0 bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-100 mt-auto self-auto rounded-full items-center flex justify-center"
             >
               ${order?.cost?.toFixed(2)}
             </Badge>
@@ -63,7 +63,7 @@ export default function OrderItem({ order, index }: OrderItemProps) {
             <h3 className="text-lg font-semibold mb-4 text-blue-700 dark:text-blue-300">
               Product Details
             </h3>
-            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <div className="flex sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 gap-5 lg:gap-0">
               <div className="flex-shrink-0">
                 <div className="flex space-x-2 overflow-x-auto pb-2 sm:pb-0">
                   <img
