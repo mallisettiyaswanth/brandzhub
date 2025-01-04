@@ -1,12 +1,28 @@
-import Image from 'next/image'
-import Link from 'next/link'
+import Image from "next/image";
+import Link from "next/link";
 
 const categories = [
-  { name: 'Sport Shoes', image: '/placeholder.svg?height=200&width=200' },
-  { name: 'T-shirts', image: '/placeholder.svg?height=200&width=200' },
-  { name: 'Hand Bags', image: '/placeholder.svg?height=200&width=200' },
-  { name: 'Slides', image: '/placeholder.svg?height=200&width=200' },
-]
+  {
+    name: "Crocs",
+    image:
+      "https://res.cloudinary.com/drvi87eud/image/upload/v1735476022/c3trfp0c4crqwpc0m7u1.jpg",
+  },
+  {
+    name: "Watches",
+    image:
+      "https://res.cloudinary.com/drvi87eud/image/upload/v1735906833/vcghmn5a1lyyfmmc4byi.jpg",
+  },
+  {
+    name: "flipflops",
+    image:
+      "https://res.cloudinary.com/drvi87eud/image/upload/v1735482278/zyv2vlr5rgqen1tnicbw.jpg",
+  },
+  {
+    name: "Slides",
+    image:
+      "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSADXiExPg5InELMNwZgjcQ_RhndLUmL46jB6jdyKcEX_SWbeElT8tO3qVGEaSaI9fyraRrAwMo5maM7pX1FaE3ilB8YIKzFrwGjd9iyBbdKADYbu-1uPI3Ow&usqp=CAE",
+  },
+];
 
 export function CategoryGrid() {
   return (
@@ -14,7 +30,7 @@ export function CategoryGrid() {
       {categories.map((category) => (
         <Link
           key={category.name}
-          href={`/category/${category.name.toLowerCase().replace(' ', '-')}`}
+          href={`/category/${category.name.toLowerCase().replace(" ", "-")}`}
           className="overflow-hidden rounded-lg border bg-white p-2 transition-transform hover:scale-105"
         >
           <div className="aspect-square">
@@ -26,10 +42,11 @@ export function CategoryGrid() {
               className="h-full w-full object-cover"
             />
           </div>
-          <p className="mt-2 text-center text-sm font-medium">{category.name}</p>
+          <p className="mt-2 text-center text-sm font-medium">
+            {category.name}
+          </p>
         </Link>
       ))}
     </div>
-  )
+  );
 }
-

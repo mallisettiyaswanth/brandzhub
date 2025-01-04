@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 
 export function Hero() {
   return (
-    <div className="relative h-auto w-full bg-gray-100">
+    <div className="relative h-auto w-full ">
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 p-4 sm:p-8">
         {/* Left Column */}
         <Card
