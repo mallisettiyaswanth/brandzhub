@@ -48,20 +48,7 @@ const ProductCard = ({ product }: Props) => {
   const [editModelOpen, setEditModelOpen] = useState<boolean>(false);
   const router = useRouter();
 
-  //   const handleDelete = async () => {
-  //     const status = await deleteProduct(product.id);
-  //     if (status.status === 200) {
-  //       toast("Success", {
-  //         description: "Product is deleted",
-  //       });
-  //       setDeleteModelOpen(false);
-  //       router.refresh();
-  //     } else {
-  //       toast("Error", {
-  //         description: "Something went wrong!",
-  //       });
-  //     }
-  //   };
+
 
   const dispatch = useDispatch();
 
@@ -71,6 +58,7 @@ const ProductCard = ({ product }: Props) => {
         id: product.id,
         name: product.name,
         price: product.cost,
+        image: product.images[0],
         quantity: 1,
       })
     );
@@ -105,46 +93,6 @@ const ProductCard = ({ product }: Props) => {
       </CardFooter>
       {/* </Card> */}
 
-      {/* <CardFooter className="flex gap-3 p-3 lg:p-6">
-        <Dialog open={editModelOpen} onOpenChange={setEditModelOpen}>
-          <DialogTrigger>
-            <Button>
-              <Edit />
-              Edit
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogTitle>Edit Product</DialogTitle>
-            <AddProductForm
-              product={product}
-              callback={() => setEditModelOpen(false)}
-            />
-          </DialogContent>
-        </Dialog>
-
-        <Dialog open={deleteModelOpen} onOpenChange={setDeleteModelOpen}>
-          <DialogTrigger>
-            <Button variant="destructive">
-              <Trash /> Delete
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Are you sure to delete</DialogTitle>
-              <DialogDescription>
-                This action cannot be undone. This will permanently delete your
-                product from servers.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="flex self-end gap-3 ml-auto">
-              <Button onClick={() => setDeleteModelOpen(false)}>No</Button>
-              <Button variant="destructive" onClick={handleDelete}>
-                Yes
-              </Button>
-            </div>
-          </DialogContent>
-        </Dialog>
-      </CardFooter> */}
     </Card>
   );
 };

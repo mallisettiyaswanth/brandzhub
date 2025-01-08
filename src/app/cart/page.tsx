@@ -7,7 +7,7 @@ import { Minus, Plus, X, ArrowLeft, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-// import { RootState } from "@/store"; // Adjust based on your Redux store setup
+
 import { RootState } from "@/context/store";
 import {
   removeFromCart,
@@ -95,7 +95,7 @@ export default function CartPage() {
                         </button>
                       </div>
                       <div className="ml-auto font-semibold">
-                        ${(item.price * item.quantity).toFixed(2)}
+                        ₹{(item.price * item.quantity).toFixed(2)}
                       </div>
                     </div>
                   </div>
@@ -112,7 +112,7 @@ export default function CartPage() {
             <div className="space-y-2">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Subtotal</span>
-                <span>${totalPrice.toFixed(2)}</span>
+                <span>₹{totalPrice.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Shipping</span>
@@ -121,7 +121,7 @@ export default function CartPage() {
               <Separator className="my-4" />
               <div className="flex justify-between text-lg font-semibold">
                 <span>Total</span>
-                <span>${totalPrice.toFixed(2)}</span>
+                <span>₹{totalPrice.toFixed(2)}</span>
               </div>
             </div>
             <Button className="w-full mt-6" size="lg">
