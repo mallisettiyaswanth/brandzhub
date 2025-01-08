@@ -28,7 +28,7 @@ const SearchBar = (props: Props) => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <Button type="submit">Seach</Button>
+      <Button type="submit">Search</Button>
     </form>
   );
 };

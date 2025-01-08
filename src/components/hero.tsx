@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 export function Hero() {
   return (
@@ -66,13 +67,15 @@ export function Hero() {
                 <p className="mt-2 text-white text-sm">
                   Enter the Fashion world.
                 </p>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="mt-4 rounded-full bg-black text-white"
-                >
-                  →
-                </Button>
+                <Link href="/search/crocs">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="mt-4 rounded-full bg-black text-white"
+                  >
+                    →
+                  </Button>
+                </Link>
               </div>
             </div>
           </Card>
@@ -90,13 +93,15 @@ export function Hero() {
                   Be Beautiful,
                 </p>
                 <p className="text-2xl sm:text-3xl font-medium">Be You.</p>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="mt-4 rounded-full bg-white text-black"
-                >
-                  →
-                </Button>
+                <Link href="/search/watches">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="mt-4 rounded-full bg-white text-black"
+                  >
+                    →
+                  </Button>
+                </Link>
               </div>
             </div>
           </Card>

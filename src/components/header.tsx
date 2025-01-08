@@ -17,8 +17,8 @@ export function Header() {
         <div className="flex items-center justify-between gap-4 px-5 py-3">
           <Link href="/" className="text-xl font-bold">
             <div className="flex items-center text-center">
-              <img src="/Logo.png" alt="" className="w-10 h-10" />
-              <span className="text-center mt-1 ml-2 hidden sm:block">
+              <img src="/Logo.png" alt="" className="w-12 mt-1 h-14" />
+              <span className="text-center  ml-2 hidden sm:block">
                 brandZhub
               </span>
             </div>
