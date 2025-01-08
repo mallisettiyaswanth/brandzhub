@@ -46,7 +46,7 @@ type Props = {
 
 const ProductCard = ({ product }: Props) => {
   return (
-    <Link href={`/products/${product.id}`}>
+    <Link href={`/products/${product._id}`}>
       <Card key={product.name} className="shadow-md">
         <CardHeader>
           <CardTitle>{product.name}</CardTitle>
