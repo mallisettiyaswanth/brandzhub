@@ -7,7 +7,7 @@ import { Minus, Plus, X, ArrowLeft, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-// import { RootState } from "@/store"; // Adjust based on your Redux store setup
+
 import { RootState } from "@/context/store";
 import {
   removeFromCart,
@@ -88,6 +88,7 @@ export default function CartPage() {
                           <X className="w-4 h-4" />
                         </button>
                       </div>
+
                       <div className="mt-2 flex items-center gap-4">
                         <div className="flex items-center gap-2">
                           <button
@@ -120,23 +121,24 @@ export default function CartPage() {
             </Card>
           </div>
 
-          <div className="lg:col-span-1">
-            <Card className="p-6">
-              <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Subtotal</span>
-                  <span>${totalPrice.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Shipping</span>
-                  <span className="text-green-600">Free</span>
-                </div>
-                <Separator className="my-4" />
-                <div className="flex justify-between text-lg font-semibold">
-                  <span>Total</span>
-                  <span>${totalPrice.toFixed(2)}</span>
-                </div>
+
+
+        <div className="lg:col-span-1">
+          <Card className="p-6">
+            <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Subtotal</span>
+                <span>₹{totalPrice.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Shipping</span>
+                <span className="text-green-600">Free</span>
+              </div>
+              <Separator className="my-4" />
+              <div className="flex justify-between text-lg font-semibold">
+                <span>Total</span>
+                <span>₹{totalPrice.toFixed(2)}</span>
               </div>
               <Button className="w-full mt-6" size="lg">
                 Proceed to Checkout

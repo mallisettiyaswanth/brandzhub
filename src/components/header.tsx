@@ -4,9 +4,9 @@ import { CarrotIcon, Search, ShoppingCartIcon } from "lucide-react";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { RootState } from "@/context/store"; // Adjust path based on your project
+import SearchBar from "./search";
 
 export function Header() {
-  // Fetch the total quantity of items in the cart
   const cartItemCount = useSelector((state: RootState) =>
     state.cart.items.reduce((total, item) => total + item.quantity, 0)
   );
@@ -25,14 +25,7 @@ export function Header() {
           </Link>
 
           {/* Search Bar */}
-          <div className="flex-grow max-w-xs mx-auto relative sm:block">
-            <input
-              type="text"
-              placeholder="Search for Watches, Crocs, etc.."
-              className="w-full p-2 pl-10 border bg-transparent border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
-            />
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" />
-          </div>
+          <SearchBar />
 
           <nav className="flex items-center gap-8 font-bold relative">
             <Link href="/" className="text-md">
