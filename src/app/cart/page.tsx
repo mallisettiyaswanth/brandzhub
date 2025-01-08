@@ -121,34 +121,33 @@ export default function CartPage() {
             </Card>
           </div>
 
-
-
-        <div className="lg:col-span-1">
-          <Card className="p-6">
-            <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Subtotal</span>
-                <span>₹{totalPrice.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Shipping</span>
-                <span className="text-green-600">Free</span>
-              </div>
-              <Separator className="my-4" />
-              <div className="flex justify-between text-lg font-semibold">
-                <span>Total</span>
-                <span>₹{totalPrice.toFixed(2)}</span>
-              </div>
-              <Button className="w-full mt-6" size="lg">
-                Proceed to Checkout
-              </Button>
-              <Link href="/">
-                <Button variant="outline" className="w-full mt-4" size="lg">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Continue Shopping
+          <div className="lg:col-span-1">
+            <Card className="p-6">
+              <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+              <div className="space-y-2">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Subtotal</span>
+                  <span>₹{totalPrice.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Shipping</span>
+                  <span className="text-green-600">Free</span>
+                </div>
+                <Separator className="my-4" />
+                <div className="flex justify-between text-lg font-semibold">
+                  <span>Total</span>
+                  <span>₹{totalPrice.toFixed(2)}</span>
+                </div>
+                <Button className="w-full mt-6" size="lg">
+                  Proceed to Checkout
                 </Button>
-              </Link>
+                <Link href="/">
+                  <Button variant="outline" className="w-full mt-4" size="lg">
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    Continue Shopping
+                  </Button>
+                </Link>
+              </div>
             </Card>
           </div>
         </div>
