@@ -66,7 +66,7 @@ const ProductCard = ({ product }: Props) => {
       <CardContent className="flex flex-col gap-3">
         <ProductCarousel images={product.images} />
         <div>
-          <p className="text-sm text-gray-500 mb-2">Price: ${product.cost}</p>
+          <p className="text-sm text-gray-500 mb-2">Price: ₹{product.cost}</p>
           <p className="text-sm text-gray-500 mb-2">
             Sizes: {product.size.join(", ") || "N/A"}
           </p>
@@ -216,7 +216,7 @@ export default ProductCard;
 //           <div className="space-y-2">
 //             <div className="flex items-center justify-between">
 //               <span className="text-lg font-semibold text-blue-700 dark:text-blue-300">
-//                 Price: ${product.cost}
+//                 Price: ₹{product.cost}
 //               </span>
 //             </div>
 //             <div className="space-y-1">
