@@ -118,3 +118,20 @@ export const deleteProduct = async (productId: string) => {
   }
 };
 
+export const getProductWithId = async (productId: string) => {
+  try {
+    await connectDb();
+    const product = await Product.findById(productId);
+    return {
+      status: 200,
+      body: {
+        product,
+      },
+    };
+  } catch {
+    return {
+      status: 404,
+      message: "Failed",
+    };
+  }
+};

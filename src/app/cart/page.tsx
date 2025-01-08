@@ -15,6 +15,7 @@ import {
   decreaseQuantity,
 } from "@/context/cartSlice";
 import { Header } from "@/components/header";
+import { useRouter } from "next/navigation";
 
 export default function CartPage() {
   const dispatch = useDispatch();
@@ -31,6 +32,11 @@ export default function CartPage() {
 
   const handleDecreaseQuantity = (id: string) => {
     dispatch(decreaseQuantity(id));
+  };
+  const router = useRouter();
+
+  const handleCheckout = () => {
+    router.push("/checkout");
   };
 
   if (cartItems.length === 0) {
@@ -62,8 +68,7 @@ export default function CartPage() {
         <Header />
       </div>
       <div className="container px-4 py-8 mx-auto mb-24">
-        <h1 className="text-3xl font-bold mb-8">Shoppin g Cart</h1>
-
+        <h1 className="text-3xl font-bold mb-8">Shopping Cart</h1>
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <Card className="p-6">
@@ -111,6 +116,13 @@ export default function CartPage() {
                           ${(item.price * item.quantity).toFixed(2)}
                         </div>
                       </div>
+                      <div>
+                        {item.size && (
+                          <span className="text-muted-foreground">
+                            Size: {item.size}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
                   {index < cartItems.length - 1 && (
@@ -138,7 +150,11 @@ export default function CartPage() {
                   <span>Total</span>
                   <span>₹{totalPrice.toFixed(2)}</span>
                 </div>
-                <Button className="w-full mt-6" size="lg">
+                <Button
+                  className="w-full mt-6"
+                  size="lg"
+                  onClick={handleCheckout}
+                >
                   Proceed to Checkout
                 </Button>
                 <Link href="/">

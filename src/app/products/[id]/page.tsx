@@ -11,26 +11,25 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/context/cartSlice";
+import { useQuery } from "@tanstack/react-query";
+import { getProductWithId } from "@/app/actions/product";
+import { toast } from "sonner";
 
-// Example Product Data
-const product = {
-  id: "1", // Added ID for Redux
-  images: [
-    "https://res.cloudinary.com/drvi87eud/image/upload/v1735541031/euqbtkvtsapj0ezsrrmv.jpg",
-    "https://res.cloudinary.com/drvi87eud/image/upload/v1735541034/atmxgcek2eepgx8exqlx.jpg",
-    "https://res.cloudinary.com/drvi87eud/image/upload/v1735541029/l1g3pcmvuzokccgvrqbr.jpg",
-    "https://res.cloudinary.com/drvi87eud/image/upload/v1735541027/zouxm8usaahbfgpwpt9v.jpg",
-  ],
-  name: "Puma Men Slides",
-  cost: 799,
-  size: ["6", "7", "8", "9", "10", "11"],
-  category: ["Puma", "Slides", "Black & White"],
-  type: "Men",
-};
-
-export default function ProductPage() {
+export default function ProductPage({ params }: { params: { id: string } }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const dispatch = useDispatch();
+  const { data: productItem, isLoading } = useQuery({
+    queryKey: ["product", params.id],
+    queryFn: async () => {
+      return getProductWithId(params.id);
+    },
+  });
+
+  const product = productItem?.body?.product;
+
+  const [size, setSize] = useState(() => {
+    return isLoading ? "" : product.size[0];
+  });
 
   // Function to handle next image
   const handleNextImage = () => {
@@ -46,22 +45,36 @@ export default function ProductPage() {
     );
   };
 
-  // Function to handle thumbnail click
   const handleThumbnailClick = (index: number) => {
     setCurrentImageIndex(index);
   };
 
-  // Handle Add to Cart
   const handleAddToCart = () => {
-    dispatch(
-      addToCart({
-        id: product.id,
-        name: product.name,
-        price: product.cost,
-        quantity: 1,
-      })
-    );
+    console.log(size);
+
+    if (!size) {
+      toast.message("Please select a size");
+    } else {
+      dispatch(
+        addToCart({
+          id: params.id as string,
+          name: product.name as string,
+          price: product.cost as number,
+          quantity: 1 as number,
+          size: size as string,
+          image: product.images[currentImageIndex] as string,
+        })
+      );
+    }
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-96">
+        <span>Loading...</span>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -94,7 +107,7 @@ export default function ProductPage() {
               </button>
             </div>
             <div className="mt-4 flex gap-4 overflow-auto pb-2">
-              {product.images.map((image, index) => (
+              {product.images.map((image: string, index: number) => (
                 <button
                   key={index}
                   onClick={() => handleThumbnailClick(index)}
@@ -133,21 +146,22 @@ export default function ProductPage() {
               <div>
                 <h3 className="text-lg font-semibold">Size</h3>
                 <RadioGroup
-                  defaultValue={product.size[0]}
+                  value={size}
+                  onValueChange={setSize}
                   className="mt-2 flex flex-wrap gap-2"
                 >
-                  {product.size.map((size) => (
-                    <div key={size}>
+                  {product.size.map((sizes: string) => (
+                    <div key={sizes}>
                       <RadioGroupItem
-                        value={size}
-                        id={`size-${size}`}
+                        value={sizes}
+                        id={`size-${sizes}`}
                         className="peer hidden"
                       />
                       <Label
-                        htmlFor={`size-${size}`}
+                        htmlFor={`size-${sizes}`}
                         className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md border peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10"
                       >
-                        {size}
+                        {sizes}
                       </Label>
                     </div>
                   ))}
@@ -162,7 +176,7 @@ export default function ProductPage() {
               <div>
                 <h3 className="font-semibold">Categories</h3>
                 <div className="mt-2 flex flex-wrap gap-2">
-                  {product.category.map((category) => (
+                  {product.category.map((category: string) => (
                     <span
                       key={category}
                       className="rounded-full bg-secondary px-3 py-1 text-sm text-secondary-foreground"
