@@ -21,6 +21,15 @@ import { createOrder } from "../actions/order";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { clearCart } from "@/context/cartSlice";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 type Props = {};
 
@@ -35,6 +44,15 @@ const Page: React.FC<Props> = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
   const dispatch = useDispatch();
+  const [pincodeValue, setPincodeValue] = React.useState<string | undefined>(
+    undefined
+  );
+  const pincodes = [
+    534275, 534250, 534260, 534265, 534267, 534245, 534247, 534243, 534201,
+    534202, 534203, 534204, 534206, 534210, 534244, 534199, 534320, 534235,
+    521340, 521333, 521301, 521322, 534101, 534166, 534198, 534156, 534211,
+    534216, 534218, 534237,
+  ];
 
   const { mutateAsync } = useMutation({
     mutationKey: ["createOrder"],
@@ -45,7 +63,7 @@ const Page: React.FC<Props> = () => {
           quantity: cartItem.quantity,
           size: cartItem.size,
         })) ?? [],
-        values.address,
+        values.address + ", " + pincodeValue,
         values.username,
         values.phoneNumber
       );
@@ -142,26 +160,50 @@ const Page: React.FC<Props> = () => {
             />
 
             {/* Phone Number Field */}
-            <FormField
-              control={form.control}
-              name="phoneNumber"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Phone Number</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter your phone number"
-                      {...field}
-                      disabled={form.formState.isSubmitting}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    Provide a valid phone number for contact purposes.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="w-full flex flex-col lg:flex-row gap-5 items-center">
+              <FormField
+                control={form.control}
+                name="phoneNumber"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Phone Number</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter your phone number"
+                        {...field}
+                        disabled={form.formState.isSubmitting}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      Provide a valid phone number for contact purposes.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div>
+                <h1>Pincode</h1>
+                <Select value={pincodeValue} onValueChange={setPincodeValue}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select pincode" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Pincode</SelectLabel>
+                      {pincodes.map((pincode) => (
+                        <SelectItem key={pincode} value={`${pincode}`}>
+                          {pincode}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <span className="text-xs text-gray-500">
+                  Pincodes not mentioned in the above list, can directly reach
+                  out to us through +91 6309547997.
+                </span>
+              </div>
+            </div>
 
             {/* Submit Button */}
             <Button
