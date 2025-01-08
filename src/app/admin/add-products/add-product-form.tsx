@@ -110,7 +110,7 @@ export function AddProductForm({ product, callback }: Props) {
       data.name,
       data.price,
       data.images,
-      categories,
+      data.category,
       data.type,
       sizes
     );
