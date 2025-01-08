@@ -30,7 +30,7 @@ export function CategoryGrid() {
       {categories.map((category) => (
         <Link
           key={category.name}
-          href={`/category/${category.name.toLowerCase().replace(" ", "-")}`}
+          href={`/search/${category.name.toLowerCase().replace(" ", "-")}`}
           className="overflow-hidden rounded-lg border bg-white p-2 transition-transform hover:scale-105"
         >
           <div className="aspect-square">

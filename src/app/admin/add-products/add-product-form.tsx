@@ -44,9 +44,13 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 const sizeOptions = [
-  { value: "small", label: "Small" },
-  { value: "medium", label: "Medium" },
-  { value: "large", label: "Large" },
+  { value: "6", label: "6" },
+  { value: "7", label: "7" },
+  { value: "8", label: "8" },
+  { value: "9", label: "9" },
+  { value: "10", label: "10" },
+  { value: "11", label: "11" },
+  { value: "12", label: "12" },
 ];
 
 const categoryOptions = [
@@ -167,6 +171,19 @@ export function AddProductForm({ product, callback }: Props) {
     if (currentImages.length > 1) {
       const newImages = currentImages.filter((_, i) => i !== index);
       form.setValue("images", newImages);
+    }
+  };
+
+  const addCategory = () => {
+    const currentCategories = form.getValues("category");
+    form.setValue("category", [...currentCategories, ""]);
+  };
+
+  const removeCategory = (index: number) => {
+    const currentCategories = form.getValues("category");
+    if (currentCategories.length > 1) {
+      const newCategories = currentCategories.filter((_, i) => i !== index);
+      form.setValue("category", newCategories);
     }
   };
 
@@ -317,19 +334,56 @@ export function AddProductForm({ product, callback }: Props) {
         <FormField
           control={form.control}
           name="category"
-          render={({ field }) => (
+          render={() => (
             <FormItem>
-              <FormLabel>Category</FormLabel>
+              <FormLabel>Categories</FormLabel>
               <FormControl>
-                <MultiSelect
-                  defaultValue={categories}
-                  options={categoryOptions}
-                  {...field}
-                  onValueChange={setCategories}
-                  placeholder="Select category"
-                  disabled={form.formState.isSubmitting}
-                />
+                <div className="space-y-2">
+                  {form.watch("category").map((_, index) => (
+                    <FormField
+                      key={index}
+                      control={form.control}
+                      name={`category.${index}`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <div className="flex items-center space-x-2">
+                            <FormControl>
+                              <Input
+                                placeholder={`Category ${index + 1}`}
+                                {...field}
+                                disabled={form.formState.isSubmitting}
+                              />
+                            </FormControl>
+                            {index > 0 && (
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => removeCategory(index)}
+                                aria-label={`Remove category ${index + 1}`}
+                                disabled={form.formState.isSubmitting}
+                              >
+                                <X className="h-4 w-4" />
+                              </Button>
+                            )}
+                          </div>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  ))}
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={addCategory}
+                    className="mt-2"
+                    disabled={form.formState.isSubmitting}
+                  >
+                    Add Category
+                  </Button>
+                </div>
               </FormControl>
+
               <FormMessage />
             </FormItem>
           )}
