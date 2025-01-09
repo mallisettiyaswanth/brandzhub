@@ -104,10 +104,32 @@ export const getOrder = async () => {
     await connectDb();
     const orders = await Order.find({}).populate("product");
 
+    const formattedOrders = orders.map((order) => {
+      return {
+        id: order._id.toString(),
+        quantity: order.quantity,
+        size: order.size,
+        product: {
+          id: order.product._id.toString(),
+          images: order.product.images,
+          name: order.product.name,
+          cost: order.product.cost,
+          category: order.product.category,
+          type: order.product.type,
+          size: order.product.size,
+        },
+        address: order.address,
+        username: order.username,
+        phoneNumber: order.phoneNumber,
+        status: order.status,
+        cost: order.cost,
+      };
+    });
+
     return {
       status: 200,
       body: {
-        orders,
+        orders: formattedOrders,
       },
     };
   } catch (err) {
