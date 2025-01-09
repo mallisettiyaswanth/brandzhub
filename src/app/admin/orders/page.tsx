@@ -1,8 +1,14 @@
+"use client";
+
 import { getOrder } from "@/app/actions/order";
 import { OrderList } from "./order-list";
+import { useQuery } from "@tanstack/react-query";
 
-export default async function OrdersPage() {
-  const orders = await getOrder();
+export default function OrdersPage() {
+  const { data: orders } = useQuery({
+    queryKey: ["orders"],
+    queryFn: () => getOrder(),
+  });
 
   return (
     <div className="space-y-6">
