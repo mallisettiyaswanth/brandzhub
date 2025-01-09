@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { LucideArrowDownWideNarrow } from "lucide-react";
 
 type Product = {
-  id: string;
+  _id: string;
   images: string[];
   cost: number;
   name: string;
