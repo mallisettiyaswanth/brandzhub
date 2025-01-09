@@ -31,7 +31,7 @@ export default function OrderItem({ order, index }: OrderItemProps) {
               <Badge className="bg-green-700">Delivered</Badge>
             )}
           </span>
-          <DeliveryButton orderId={order._id} status={order?.status} />
+          <DeliveryButton orderId={order.id} status={order?.status} />
         </CardTitle>
       </CardHeader>
       <CardContent className="p-4 bg-white dark:bg-gray-800">
