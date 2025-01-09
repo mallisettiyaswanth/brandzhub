@@ -57,6 +57,9 @@ const Page: React.FC<Props> = () => {
   const { mutateAsync } = useMutation({
     mutationKey: ["createOrder"],
     mutationFn: async (values: FormValues) => {
+      console.log(values);
+      console.log("Form is submitting...");
+      console.log(cartItems);
       return createOrder(
         cartItems?.map((cartItem) => ({
           id: cartItem.id,
@@ -80,6 +83,8 @@ const Page: React.FC<Props> = () => {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<FormValues> = (values) => {
+    console.log(values);
+
     toast.promise(
       mutateAsync(values, {
         onSuccess: () => {
