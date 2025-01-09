@@ -31,7 +31,7 @@ import { AddProductForm } from "@/app/admin/add-products/add-product-form";
 import Link from "next/link";
 
 type Product = {
-  _id: string;
+  id: string;
   images: string[];
   cost: number;
   name: string;
@@ -46,7 +46,7 @@ type Props = {
 
 const ProductCard = ({ product }: Props) => {
   return (
-    <Link href={`/products/${product._id}`}>
+    <Link href={`/products/${product.id}`}>
       <Card key={product.name} className="shadow-md">
         <CardHeader>
           <CardTitle>{product.name}</CardTitle>

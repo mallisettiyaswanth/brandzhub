@@ -25,23 +25,25 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     },
   });
 
+  console.log(productItem);
+
   const product = productItem?.body?.product;
 
   const [size, setSize] = useState(() => {
-    return isLoading ? "" : product.size[0];
+    return isLoading ? "" : product?.size[0];
   });
 
   // Function to handle next image
   const handleNextImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === product.images.length - 1 ? 0 : prevIndex + 1
+      prevIndex === product?.images.length - 1 ? 0 : prevIndex + 1
     );
   };
 
   // Function to handle previous image
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? product.images.length - 1 : prevIndex - 1
+      prevIndex === 0 ? product?.images.length - 1 : prevIndex - 1
     );
   };
 
@@ -50,18 +52,18 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   };
 
   const handleAddToCart = () => {
-    if (product.size.length !== 0) {
+    if (product?.size.length !== 0) {
       if (!size) {
         toast.message("Please select a size");
       } else {
         dispatch(
           addToCart({
             id: params.id as string,
-            name: product.name as string,
-            price: product.cost as number,
+            name: product?.name as string,
+            price: product?.cost as number,
             quantity: 1 as number,
             size: size as string,
-            image: product.images[currentImageIndex] as string,
+            image: product?.images[currentImageIndex] as string,
           })
         );
       }
@@ -98,8 +100,8 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           <div className="relative">
             <div className="aspect-square overflow-hidden rounded-lg bg-gray-100 relative">
               <Image
-                src={product.images[currentImageIndex]}
-                alt={product.name}
+                src={product?.images[currentImageIndex]}
+                alt={product?.name}
                 className="object-cover"
                 fill
                 priority
@@ -118,7 +120,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               </button>
             </div>
             <div className="mt-4 flex gap-4 overflow-auto pb-2">
-              {product.images.map((image: string, index: number) => (
+              {product?.images.map((image: string, index: number) => (
                 <button
                   key={index}
                   onClick={() => handleThumbnailClick(index)}
@@ -143,15 +145,15 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           {/* Product Details Section */}
           <div className="flex flex-col gap-4">
             <div>
-              <h1 className="text-3xl font-bold">{product.name}</h1>
+              <h1 className="text-3xl font-bold">{product?.name}</h1>
             </div>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold">₹{product.cost}</span>
+              <span className="text-3xl font-bold">₹{product?.cost}</span>
               <span className="text-sm text-muted-foreground">INR</span>
             </div>
             <span>Type</span>
             <span className="rounded-full bg-secondary w-[70px] px-3 py-1 text-sm text-center text-secondary-foreground">
-              {product.type}
+              {product?.type}
             </span>
             <div className="space-y-4">
               <div>
@@ -161,7 +163,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                   onValueChange={setSize}
                   className="mt-2 flex flex-wrap gap-2"
                 >
-                  {product.size.map((sizes: string) => (
+                  {product?.size.map((sizes: string) => (
                     <div key={sizes}>
                       <RadioGroupItem
                         value={sizes}
@@ -187,7 +189,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               <div>
                 <h3 className="font-semibold">Categories</h3>
                 <div className="mt-2 flex flex-wrap gap-2">
-                  {product.category.map((category: string) => (
+                  {product?.category.map((category: string) => (
                     <span
                       key={category}
                       className="rounded-full bg-secondary px-3 py-1 text-sm text-secondary-foreground"
