@@ -16,9 +16,21 @@ const searchProducts = async (query: string) => {
         .includes(query.toLocaleLowerCase());
     });
 
+    const filterId = filteredProducts.map((product) => {
+      return {
+        id: product._id.toString(),
+        name: product.name,
+        cost: product.cost,
+        size: product.size,
+        category: product.category,
+        type: product.type,
+        images: product.images,
+      };
+    });
+
     return {
       status: 200,
-      body: filteredProducts,
+      body: filterId,
     };
   } catch (err) {
     console.log(err);
