@@ -1,3 +1,5 @@
+"use client";
+
 import { getProducts } from "@/app/actions/product";
 import ProductCard from "./product";
 import Link from "next/link";
