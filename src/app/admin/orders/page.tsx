@@ -5,10 +5,16 @@ import { OrderList } from "./order-list";
 import { useQuery } from "@tanstack/react-query";
 
 export default function OrdersPage() {
-  const { data: orders } = useQuery({
+  const { data: orders, isLoading } = useQuery({
     queryKey: ["orders"],
     queryFn: () => getOrder(),
   });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  console.log("These are the orderes");
+  console.log(orders);
 
   return (
     <div className="space-y-6">
