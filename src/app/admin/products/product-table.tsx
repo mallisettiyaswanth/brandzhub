@@ -15,6 +15,7 @@ type Product = {
 
 export async function ProductGrid() {
   const products = (await getProducts()).body;
+  console.log(products);
   return products && products?.products?.length > 0 ? (
     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
       {products?.products?.map((product: Product, index: number) => (

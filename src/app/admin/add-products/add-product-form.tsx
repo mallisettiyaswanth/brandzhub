@@ -53,11 +53,7 @@ const sizeOptions = [
   { value: "12", label: "12" },
 ];
 
-const categoryOptions = [
-  { value: "shirts", label: "Shirts" },
-  { value: "pants", label: "Pants" },
-  { value: "accessories", label: "Accessories" },
-];
+
 
 type Props = {
   product?: Product;
@@ -65,18 +61,10 @@ type Props = {
 };
 
 export function AddProductForm({ product, callback }: Props) {
-  const [sizes, setSizes] = useState<string[]>(() => {
+  const [sizes, setSizes] = useState<string[] | []>(() => {
     return product?.size?.length
       ? product.size.filter((s) =>
           sizeOptions.some((option) => option.value === s)
-        )
-      : [];
-  });
-
-  const [categories, setCategories] = useState<string[]>(() => {
-    return product?.category?.length
-      ? product.category.filter((category) =>
-          categoryOptions.some((option) => option.value === category)
         )
       : [];
   });
@@ -90,13 +78,13 @@ export function AddProductForm({ product, callback }: Props) {
       price: product?.cost ?? 0,
       type: product?.type[0] ?? "",
       images: product?.images ?? [],
-      category: categories ?? [],
+      category: product?.category ?? [],
       sizes: sizes ?? [],
     },
   });
 
   const onAddSubmit = async (data: FormValues) => {
-    if (categories.length <= 0)
+    if (data.category.length <= 0)
       form.setError("category", {
         message: "One Category is required",
       });
@@ -119,6 +107,7 @@ export function AddProductForm({ product, callback }: Props) {
       toast("Success", {
         description: "Product is added",
       });
+      setSizes([]);
       form.reset();
     } else {
       toast("Error", {
@@ -127,7 +116,7 @@ export function AddProductForm({ product, callback }: Props) {
     }
   };
   const onEditSubmit = async (data: FormValues) => {
-    if (categories.length <= 0)
+    if (data?.category.length <= 0)
       form.setError("category", {
         message: "One Category is required",
       });
@@ -142,7 +131,7 @@ export function AddProductForm({ product, callback }: Props) {
       data.name,
       data.price,
       data.images,
-      categories,
+      data.category,
       data.type,
       sizes
     );
@@ -153,6 +142,7 @@ export function AddProductForm({ product, callback }: Props) {
       });
       if (callback) callback();
       form.reset();
+      setSizes([]);
       router.refresh();
     } else {
       toast("Error", {

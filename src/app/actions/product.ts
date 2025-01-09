@@ -22,6 +22,7 @@ export const addProduct = async (
       size: sizes,
     });
     await product.save();
+    console.log("Product added successfully");
     return {
       status: 201,
       message: "Created",
@@ -34,21 +35,27 @@ export const addProduct = async (
     };
   }
 };
-
 export const getProducts = async () => {
   try {
     await connectDb();
-    let products = await Product.find({});
-    products = products.map((product) => {
+    const products = await Product.find({});
+    const returnProducts = products.map((product) => {
       return {
         id: product._id.toString(),
-        ...product._doc,
+        images: product.images,
+        name: product.name,
+        cost: product.cost,
+        category: product.category,
+        type: product.type,
+        size: product.size,
       };
     });
+
+    console.log(returnProducts);
     return {
       status: 200,
       body: {
-        products,
+        products: returnProducts,
       },
     };
   } catch {
@@ -75,7 +82,7 @@ export const editProduct = async (
       {
         $set: {
           name: productName,
-          cost: price,  
+          cost: price,
           images: images,
           category: category,
           type: type,
@@ -122,10 +129,20 @@ export const getProductWithId = async (productId: string) => {
   try {
     await connectDb();
     const product = await Product.findById(productId);
+    const returnObject = {
+      id: product._id.toString(),
+      images: product.images,
+      name: product.name,
+      cost: product.cost,
+      category: product.category,
+      type: product.type,
+      size: product.size,
+    };
+    console.log(returnObject);
     return {
       status: 200,
       body: {
-        product,
+        product: returnObject,
       },
     };
   } catch {
