@@ -15,7 +15,7 @@ const categories = [
   {
     name: "flipflops",
     image:
-      "https://res.cloudinary.com/drvi87eud/image/upload/v1735482278/zyv2vlr5rgqen1tnicbw.jpg",
+      "https://res.cloudinary.com/drvi87eud/image/upload/v1736423171/ntb1wlqz72jkh3fo5j8h.jpg",
   },
   {
     name: "Slides",

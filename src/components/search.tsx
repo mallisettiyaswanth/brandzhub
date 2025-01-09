@@ -7,6 +7,7 @@ type Props = {};
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { Input } from "./ui/input";
+import { Search } from "lucide-react";
 
 const SearchBar = (props: Props) => {
   const [search, setSearch] = useState("");
@@ -28,7 +29,12 @@ const SearchBar = (props: Props) => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <Button type="submit">Search</Button>
+      <Button type="submit">
+        <span className="hidden lg:block">Search</span>
+        <span className="block lg:hidden">
+          <Search />
+        </span>
+      </Button>
     </form>
   );
 };

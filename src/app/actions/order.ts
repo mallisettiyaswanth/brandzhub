@@ -18,7 +18,7 @@ export const createOrder = async (
 ) => {
   try {
     await connectDb();
-
+    console.log(orders);
     const createdOrders = [];
     for (const order of orders) {
       const product = await Product.findById(order.id);
@@ -45,6 +45,7 @@ export const createOrder = async (
       orders: createdOrders,
     };
   } catch (error) {
+    console.log(error)
     return {
       status: 404,
       message: "Failed to create orders.",

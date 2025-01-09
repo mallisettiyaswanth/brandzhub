@@ -18,7 +18,6 @@ const OrderSchema = new Schema<OrderSchemaType>({
   },
   size: {
     type: String,
-    required: true,
   },
   product: {
     type: mongoose.Schema.Types.ObjectId,
