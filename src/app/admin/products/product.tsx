@@ -37,9 +37,10 @@ type Product = {
 
 type Props = {
   product: Product;
+  refetch?: () => void;
 };
 
-const ProductCard = ({ product }: Props) => {
+const ProductCard = ({ product, refetch }: Props) => {
   const [deleteModelOpen, setDeleteModelOpen] = useState<boolean>(false);
   const [editModelOpen, setEditModelOpen] = useState<boolean>(false);
   const router = useRouter();
@@ -50,6 +51,7 @@ const ProductCard = ({ product }: Props) => {
       toast("Success", {
         description: "Product is deleted",
       });
+      if (refetch) refetch();
       setDeleteModelOpen(false);
       router.refresh();
     } else {
@@ -88,7 +90,10 @@ const ProductCard = ({ product }: Props) => {
             <DialogTitle>Edit Product</DialogTitle>
             <AddProductForm
               product={product}
-              callback={() => setEditModelOpen(false)}
+              callback={() => {
+                if (refetch) refetch();
+                setEditModelOpen(false);
+              }}
             />
           </DialogContent>
         </Dialog>

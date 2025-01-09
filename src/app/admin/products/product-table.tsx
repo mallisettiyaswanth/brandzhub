@@ -2,6 +2,7 @@ import { getProducts } from "@/app/actions/product";
 import ProductCard from "./product";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useQuery } from "@tanstack/react-query";
 
 type Product = {
   id: string;
@@ -13,13 +14,24 @@ type Product = {
   type: string;
 };
 
-export async function ProductGrid() {
-  const products = (await getProducts()).body;
-  console.log(products);
-  return products && products?.products?.length > 0 ? (
+export function ProductGrid() {
+  const {
+    data: products,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: () => getProducts(),
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  return products && products.body && products?.body?.products.length > 0 ? (
     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-      {products?.products?.map((product: Product, index: number) => (
-        <ProductCard product={product} key={index} />
+      {products?.body?.products?.map((product: Product, index: number) => (
+        <ProductCard product={product} key={index} refetch={refetch} />
       ))}
     </div>
   ) : (
