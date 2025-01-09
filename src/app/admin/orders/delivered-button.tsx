@@ -44,6 +44,7 @@ const DeliveryButton = ({ orderId, status, refetch }: Props) => {
         description: "Order Deleted",
       });
       router.refresh();
+      refetch();
     } else {
       toast("Error", {
         description: "Something went wrong!",
