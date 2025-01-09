@@ -14,10 +14,14 @@ export function Header() {
   return (
     <header className="border border-gray-300 fixed top-0 z-10 w-full bg-transparent h-20 flex items-center backdrop-blur rounded-xl">
       <div className="container mx-auto px-4 py-3">
-        <div className="flex items-center justify-between gap-4 px-5 py-3">
+        <div className="flex items-center justify-between gap-4 px-2 md:px-5 py-3">
           <Link href="/" className="text-xl font-bold">
             <div className="flex items-center text-center">
-              <img src="/Logo.png" alt="" className="w-12 mt-1 h-14" />
+              <img
+                src="/Logo.png"
+                alt=""
+                className="w-28 mt-1 h-28 md:h-20 md:w-20"
+              />
               <span className="text-center  ml-2 hidden sm:block">
                 brandZhub
               </span>

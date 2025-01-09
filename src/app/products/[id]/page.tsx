@@ -50,10 +50,21 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   };
 
   const handleAddToCart = () => {
-    console.log(size);
-
-    if (!size) {
-      toast.message("Please select a size");
+    if (product.size.length !== 0) {
+      if (!size) {
+        toast.message("Please select a size");
+      } else {
+        dispatch(
+          addToCart({
+            id: params.id as string,
+            name: product.name as string,
+            price: product.cost as number,
+            quantity: 1 as number,
+            size: size as string,
+            image: product.images[currentImageIndex] as string,
+          })
+        );
+      }
     } else {
       dispatch(
         addToCart({
