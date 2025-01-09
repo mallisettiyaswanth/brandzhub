@@ -23,6 +23,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "sonner";
 import { AddProductForm } from "../add-products/add-product-form";
+import AdminProductCarousel from "@/components/admin-product-carousel";
 
 type Product = {
   id: string;
@@ -64,7 +65,7 @@ const ProductCard = ({ product }: Props) => {
         <CardTitle>{product.name}</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-3">
-        <ProductCarousel images={product.images} />
+        <AdminProductCarousel images={product.images} />
         <div>
           <p className="text-sm text-gray-500 mb-2">Price: ₹{product.cost}</p>
           <p className="text-sm text-gray-500 mb-2">

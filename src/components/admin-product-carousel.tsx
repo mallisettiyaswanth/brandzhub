@@ -6,7 +6,7 @@ type Props = {
   images: string[];
 };
 
-const ProductCarousel = ({ images }: Props) => {
+const AdminProductCarousel = ({ images }: Props) => {
   return (
     <div className="rounded-md overflow-hidden">
       {images.length > 0 ? (
@@ -20,7 +20,7 @@ const ProductCarousel = ({ images }: Props) => {
   );
 };
 
-export default ProductCarousel;
+export default AdminProductCarousel;
 
 function ImageSlider({ images }: { images: string[] }) {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -46,7 +46,7 @@ function ImageSlider({ images }: { images: string[] }) {
       />
       {images.length > 1 && (
         <>
-          {/* <button
+          <button
             onClick={goToPrevious}
             className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white p-1 rounded-full"
           >
@@ -57,7 +57,7 @@ function ImageSlider({ images }: { images: string[] }) {
             className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white p-1 rounded-full"
           >
             &#8594;
-          </button> */}
+          </button>
         </>
       )}
     </div>
