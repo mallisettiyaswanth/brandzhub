@@ -15,9 +15,10 @@ import DeliveryButton from "./delivered-button";
 interface OrderItemProps {
   order: Order;
   index: number;
+  refetch: () => void;
 }
 
-export default function OrderItem({ order, index }: OrderItemProps) {
+export default function OrderItem({ order, index, refetch }: OrderItemProps) {
   return (
     <Card className="overflow-hidden transition-shadow duration-300 hover:shadow-lg border-t-4 border-t-blue-500 dark:border-t-blue-400">
       <CardHeader className="bg-gradient-to-r from-blue-100 via-teal-100 to-amber-100 dark:from-blue-900/50 dark:via-teal-900/50 dark:to-amber-900/50">
@@ -31,7 +32,11 @@ export default function OrderItem({ order, index }: OrderItemProps) {
               <Badge className="bg-green-700">Delivered</Badge>
             )}
           </span>
-          <DeliveryButton orderId={order.id} status={order?.status} />
+          <DeliveryButton
+            orderId={order.id}
+            status={order?.status}
+            refetch={refetch}
+          />
         </CardTitle>
       </CardHeader>
       <CardContent className="p-4 bg-white dark:bg-gray-800">

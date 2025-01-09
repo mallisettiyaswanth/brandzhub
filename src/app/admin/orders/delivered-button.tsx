@@ -9,9 +9,10 @@ import { toast } from "sonner";
 type Props = {
   orderId: string;
   status: string;
+  refetch: () => void;
 };
 
-const DeliveryButton = ({ orderId, status }: Props) => {
+const DeliveryButton = ({ orderId, status, refetch }: Props) => {
   const router = useRouter();
   const [isMarking, setIsMarking] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -24,6 +25,7 @@ const DeliveryButton = ({ orderId, status }: Props) => {
       toast("Success", {
         description: "Order Marked as Delivered",
       });
+      refetch();
       router.refresh();
     } else {
       toast("Error", {
