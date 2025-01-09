@@ -31,7 +31,7 @@ import { AddProductForm } from "@/app/admin/add-products/add-product-form";
 import Link from "next/link";
 
 type Product = {
-  id: string;
+  _id: string;
   images: string[];
   cost: number;
   name: string;
