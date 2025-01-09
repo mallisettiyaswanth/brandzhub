@@ -37,7 +37,7 @@ const Page = ({ params: { query } }: Props) => {
     <div className="flex flex-col w-full min-h-screen">
       <Header />
       <div className="flex flex-col p-5 mt-20">
-        <h1 className="text-3xl">Search results for '{query}'</h1>
+        <h1 className="text-3xl">Search results for &apos;{query}&apos;</h1>
         <div className="p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {products &&
             products.body &&

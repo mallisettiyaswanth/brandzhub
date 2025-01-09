@@ -54,9 +54,13 @@ const ProductCard = ({ product }: Props) => {
         <CardContent className="flex flex-col gap-3">
           <ProductCarousel images={product.images} />
           <div>
-            <p className="text-sm text-gray-500 mb-2">Price: ${product.cost}</p>
+            <p className="text-sm text-gray-500 mb-2">Price: ₹{product.cost}</p>
             <p className="text-sm text-gray-500 mb-2">
-              Sizes: {product.size.join(", ") || "N/A"}
+              {product.size ? (
+                <>Sizes: {product.size.join(", ") || "N/A"}</>
+              ) : (
+                <></>
+              )}
             </p>
             <p className="text-sm text-gray-500 mb-2">
               Category: {product.category.join(", ") || "N/A"}
