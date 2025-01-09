@@ -21,16 +21,19 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [email] = useState(() => {
-    return localStorage.getItem("email") ?? undefined;
-  });
+  const [email, setEmail] = useState<string | undefined>(undefined);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const rotuer = useRouter();
+  const router = useRouter();
   const pathName = usePathname();
 
   useEffect(() => {
-    if (!email) rotuer.replace("/");
-  }, []);
+    const storedEmail = localStorage.getItem("email");
+    if (!storedEmail) {
+      router.replace("/");
+    } else {
+      setEmail(storedEmail);
+    }
+  }, [router]);
 
   return (
     <>

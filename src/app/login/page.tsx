@@ -9,25 +9,28 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  const [email, setEmail] = useState(() => {
-    return localStorage.getItem("email") ?? "";
-  });
 
   useEffect(() => {
-    if (email) return router.push("/admin/products");
-  }, []);
+    const storedEmail = localStorage.getItem("email");
+    if (storedEmail) {
+      setEmail(storedEmail);
+      router.push("/admin/products");
+    }
+  }, [router]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     e.stopPropagation();
+
     if (email === "admin@gmail.com" && password === "admin") {
       localStorage.setItem("email", "admin@gmail.com");
-      toast("Login Success");
+      toast.success("Login Success");
       router.push("/admin/orders");
     } else {
-      toast("Email or password is wrong!");
+      toast.error("Email or password is wrong!");
     }
   };
 
