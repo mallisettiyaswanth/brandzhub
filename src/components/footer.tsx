@@ -78,7 +78,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="https://www.instagram.com/brandzhub_1/"
                   className="text-sm text-gray-600 hover:text-gray-900"
                 >
                   Instagram
