@@ -55,6 +55,11 @@ export default function OrderItem({ order, index, refetch }: OrderItemProps) {
                 <Phone className="h-4 w-4 text-amber-500 dark:text-amber-400" />
                 <span className="text-sm">{order?.phoneNumber}</span>
               </div>
+              <div className="flex items-center space-x-2">
+                {/* <Phone className="h-4 w-4 text-amber-500 dark:text-amber-400" /> */}
+                <h3>Size:</h3>
+                <span className="text-sm">{order?.size}</span>
+              </div>
             </div>
             <Badge
               variant="secondary"
