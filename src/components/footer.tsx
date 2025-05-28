@@ -107,15 +107,20 @@ export function Footer() {
         {/* Bottom Section */}
         <div className="mt-8 flex flex-col items-center justify-center border-t border-gray-200 pt-8">
           <p className="text-sm text-gray-600">
-            &copy; 2025 brandZhub. All rights reserved.
+            &copy; 2025 brandZhub. All rights reserved. <br /><br />
+            <strong>Developed by Yaswanth Mallisetti & Yaswanth Varada </strong>
           </p>
-          <div className="mt-4 flex justify-center">
+          <div className="mt-4 flex justify-center gap-4">
             <Link
               href="https://wa.link/d9dky0"
               className="flex items-center rounded-full bg-green-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-600"
             >
               <WhatsappIcon className="mr-2 h-5 w-5" />
-              Ping me on WhatsApp
+              Ping to BrandZHub
+            </Link>
+            <Link href={"https://wa.link/c8kmol"} className="flex items-center rounded-full bg-green-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-600">
+              <WhatsappIcon className="mr-2 h-5 w-5" />
+              Ping to Developers
             </Link>
           </div>
         </div>
